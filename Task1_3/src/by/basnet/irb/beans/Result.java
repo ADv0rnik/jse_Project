@@ -40,5 +40,16 @@ public class Result {
         this.mark = mark;
     }
 
+    public int strToIntMark(String value){
+        return (int)Double.parseDouble(value) * 10;
+    }
 
+    public String setStringMark(int mark){
+        return String.valueOf(mark / 10);
+    }
+
+    @Override
+    public String toString() {
+        return login + ";" + name + ";" + date + ";" + setStringMark(mark);
+    }
 }
