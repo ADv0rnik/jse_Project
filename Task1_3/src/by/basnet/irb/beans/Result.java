@@ -41,7 +41,7 @@ public class Result {
     }
 
     public int strToIntMark(String value){
-        return (int)Double.parseDouble(value) * 10;
+        return Integer.parseInt(value) * 10;
     }
 
     public String setStringMark(int mark){
