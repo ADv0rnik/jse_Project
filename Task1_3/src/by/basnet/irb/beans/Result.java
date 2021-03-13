@@ -58,7 +58,7 @@ public class Result {
         }
     }
 
-   public String setStringDate (){
+   public String getStringDate(){
         return OUTPUT_DATE_FORMAT.format(date);
     }
 
@@ -84,6 +84,6 @@ public class Result {
 
     @Override
     public String toString() {
-        return login + ";" + name + ";" + setStringDate() + ";" + getStringMark(mark);
+        return login + ";" + name + ";" + getStringDate() + ";" + getStringMark(mark);
     }
 }
