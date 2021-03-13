@@ -1,5 +1,7 @@
 package by.basnet.irb.beans;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Result {
@@ -7,6 +9,22 @@ public class Result {
     String name;
     Date date;
     int mark;
+    private final static SimpleDateFormat OUTPUT_DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
+    private final static SimpleDateFormat INPUT_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+
+    public Result(String login, String name, Date date, int mark) {
+        this.login = login;
+        this.name = name;
+        this.date = date;
+        this.mark = mark;
+    }
+
+    public Result(String login, String name, String date, String mark) {
+        this.login = login;
+        this.name = name;
+        setDate(date);
+        this.mark = strToIntMark(mark);
+    }
 
     public String getLogin() {
         return login;
@@ -32,6 +50,18 @@ public class Result {
         this.date = date;
     }
 
+    public void setDate(String date) {
+        try {
+            this.date = INPUT_DATE_FORMAT.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+   public String setStringDate (){
+        return OUTPUT_DATE_FORMAT.format(date);
+    }
+
     public int getMark() {
         return mark;
     }
@@ -40,16 +70,20 @@ public class Result {
         this.mark = mark;
     }
 
+    public void setMark(String value) {
+        this.mark = strToIntMark(value);
+    }
+
     public int strToIntMark(String value){
         return Integer.parseInt(value) * 10;
     }
 
-    public String setStringMark(int mark){
+    public String getStringMark(int mark){
         return String.valueOf(mark / 10);
     }
 
     @Override
     public String toString() {
-        return login + ";" + name + ";" + date + ";" + setStringMark(mark);
+        return login + ";" + name + ";" + setStringDate() + ";" + getStringMark(mark);
     }
 }
