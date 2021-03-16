@@ -31,12 +31,12 @@ public class Mark {
         return Integer.parseInt(value) * 10;
     }
 
-    public String getStringMark(int mark){
+    public String intToStrMark(int mark){
         return String.valueOf(mark/10);
     }
 
     @Override
     public String toString() {
-        return getStringMark(mark);
+        return intToStrMark(mark);
     }
 }

@@ -1,15 +1,6 @@
 package by.basnet.irb.beans;
 
-import java.util.Date;
-
 public class HalfResult extends Mark{
-    public HalfResult(int mark) {
-        super(mark);
-    }
-
-    public HalfResult(Mark value) {
-        super(value.getMark());
-    }
 
     public HalfResult(String mark) {
         super((int) (Double.parseDouble(mark) * 10));
@@ -22,11 +13,19 @@ public class HalfResult extends Mark{
 
     @Override
     public int strToIntMark(String value) {
-        return (int)(Double.parseDouble(value) * 10);
+        return (int) (Double.parseDouble(value) * 10);
     }
 
     @Override
-    public String getStringMark(int mark) {
-        return String.valueOf((double)(mark / 10) + (((mark % 10) == 5)? 0.5 : 0));
+    public String intToStrMark(int mark) {
+        if(mark%10 == 5){
+            return String.valueOf((double)(mark / 10) + 0.5);
+        }
+        return String.valueOf((mark / 10));
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

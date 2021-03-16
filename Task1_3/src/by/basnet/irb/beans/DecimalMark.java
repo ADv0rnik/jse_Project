@@ -1,7 +1,5 @@
 package by.basnet.irb.beans;
 
-import java.util.Date;
-
 public class DecimalMark extends Mark{
 
     public DecimalMark(int mark) {
@@ -27,12 +25,12 @@ public class DecimalMark extends Mark{
     }
 
     @Override
-    public String getStringMark(int mark) {
+    public String intToStrMark(int mark) {
         return (mark / 10) + "?" + (mark % 10);
     }
 
     @Override
     public String toString() {
-        return getStringMark(getMark());
+        return intToStrMark(getMark());
     }
 }
