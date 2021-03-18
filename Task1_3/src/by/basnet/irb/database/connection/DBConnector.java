@@ -26,7 +26,7 @@ public final class DBConnector {
         return connection;
     }
 
-    public static void connectionClose(Connection c){
+    public static void closeConnection(Connection c){
         try{
             if(c!=null){
                 c.close();
@@ -58,8 +58,13 @@ public final class DBConnector {
         }
     }
 
-
+    public static void closeStatement(){
+        try{
+            if(statement != null){
+                statement.close();
+            }
+        }catch (SQLException e){
+            throw new DBExceptions("Statement closing error: ", e);
+        }
+    }
 }
-
-
-
