@@ -4,5 +4,6 @@ import by.basnet.irb.beans.Result;
 
 public interface IResultDAO {
     Result nextResult();
+    boolean hasResult();
 
 }
