@@ -64,42 +64,42 @@ public final class DBConnector {
     }
 
     public static void closeConnection(Connection c){
-        try{
-            if(c!=null){
+        if(c!=null){
+            try{
                 c.close();
+            }catch (SQLException e){
+                throw new DBExceptions("Connection error: "+ Connection.class.getSimpleName(), e);
             }
-        } catch (SQLException e){
-            throw new DBExceptions("Connection error: "+ Connection.class.getSimpleName(), e);
         }
     }
 
     public static void closeStatement(Statement statement){
-        try{
-            if(statement != null){
+        if(statement != null){
+            try{
                 statement.close();
+            } catch (SQLException e){
+                throw new DBExceptions("Statement closing error: ", e);
             }
-        }catch (SQLException e){
-            throw new DBExceptions("Statement closing error: ", e);
         }
     }
 
     public static void closeResultSet(ResultSet rs){
-        try {
-            if(rs != null){
+        if(rs != null){
+            try {
                 rs.close();
+            } catch (SQLException e){
+                throw new DBExceptions("Result Ser closing error :", e);
             }
-        } catch (SQLException e){
-            throw new DBExceptions("Result Ser closing error :", e);
         }
     }
 
     public static void closePreparedStatement(PreparedStatement ps) {
-        try {
-            if(ps != null){
+        if(ps != null){
+            try {
                 ps.close();
+            } catch (SQLException e){
+                throw new DBExceptions("PreparedStatement closing error: ", e);
             }
-        }catch (SQLException e){
-            throw new DBExceptions("PreparedStatement closing error: ", e);
         }
     }
 }

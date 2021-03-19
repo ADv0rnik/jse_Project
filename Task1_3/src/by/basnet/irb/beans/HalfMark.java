@@ -1,8 +1,12 @@
 package by.basnet.irb.beans;
 
-public class HalfResult extends Mark{
+public class HalfMark extends Mark{
 
-    public HalfResult(String mark) {
+    public HalfMark(int mark) {
+        super(mark);
+    }
+
+    public HalfMark(String mark) {
         super((int) (Double.parseDouble(mark) * 10));
     }
 
