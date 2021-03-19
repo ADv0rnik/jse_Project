@@ -1,6 +1,5 @@
 package by.basnet.irb.database.connection;
 
-import by.basnet.irb.beans.Result;
 import exceptions.DBExceptions;
 
 import java.sql.*;
@@ -13,31 +12,13 @@ public final class DBConnector {
     }
 
     public static Connection getConnection(){
-        Connection connection;
+        Connection connection = null;
         try{
             connection = DriverManager.getConnection(DB_URL, USER, PASS);
         } catch (SQLException e) {
             throw new DBExceptions("Database connecting error: " + DB_URL, e);
         }
         return connection;
-    }
-
-    public static Statement getStatement(){
-        Statement statement = null;
-        try{
-            statement = getConnection().createStatement();
-        } catch (SQLException e){
-            throw new DBExceptions("Statement creating error: ", e);
-        }
-        return statement;
-    }
-
-    public static int Update (String s){
-        try {
-            return getStatement().executeUpdate(s);
-        } catch (SQLException e) {
-            throw new DBExceptions("Statement update error: " + s, e);
-        }
     }
 
     public static ResultSet Query(Statement statement, String s){

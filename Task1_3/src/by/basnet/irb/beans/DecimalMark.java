@@ -11,12 +11,12 @@ public class DecimalMark extends Mark{
     }
 
     public DecimalMark(Mark value) {
-        super(value.getMark());
+        super(value.getValue());
     }
 
     @Override
-    public void setMark(int mark) {
-        super.setMark(mark);
+    public void setValue(int value) {
+        super.setValue(value);
     }
 
     @Override
@@ -31,6 +31,6 @@ public class DecimalMark extends Mark{
 
     @Override
     public String toString() {
-        return intToStrMark(getMark());
+        return intToStrMark(getValue());
     }
 }

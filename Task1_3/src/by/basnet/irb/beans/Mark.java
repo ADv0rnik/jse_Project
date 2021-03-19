@@ -1,30 +1,30 @@
 package by.basnet.irb.beans;
 
 public class Mark {
-    private int mark;
+    private int value;
 
     public Mark(int mark) {
-        this.mark = mark;
+        this.value = mark;
     }
 
     public Mark(Mark mark) {
-        this.mark = mark.getMark();
+        this.value = mark.getValue();
     }
 
     public Mark(String mark) {
-        this.mark = strToIntMark(mark);
+        this.value = strToIntMark(mark);
     }
 
-    public int getMark() {
-        return mark;
+    public int getValue() {
+        return value;
     }
 
-    public void setMark(int mark) {
-        this.mark = mark;
+    public void setValue(int value) {
+        this.value = value;
     }
 
     public void setMark(String value) {
-        this.mark = strToIntMark(value);
+        this.value = strToIntMark(value);
     }
 
     public int strToIntMark(String value){
@@ -37,6 +37,6 @@ public class Mark {
 
     @Override
     public String toString() {
-        return intToStrMark(mark);
+        return intToStrMark(value);
     }
 }

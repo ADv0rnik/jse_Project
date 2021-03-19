@@ -11,8 +11,8 @@ public class HalfMark extends Mark{
     }
 
     @Override
-    public void setMark(int mark) {
-        super.setMark(mark);
+    public void setValue(int value) {
+        super.setValue(value);
     }
 
     @Override
