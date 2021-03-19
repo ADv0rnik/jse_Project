@@ -4,8 +4,6 @@ import by.basnet.irb.beans.Result;
 import by.basnet.irb.dao.IResultDAO;
 import by.basnet.irb.factories.MarkFactory;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
 
 public class ResultImplCsv implements IResultDAO {
@@ -28,11 +26,28 @@ public class ResultImplCsv implements IResultDAO {
 
     @Override
     public Result nextResult() {
-        return null;
+        Result result = new Result();
+        String[]tmp = scanner.nextLine().split(";");
+        result.setLogin(tmp[LOGIN_INDEX]);
+        result.setName(tmp[TEST_INDEX]);
+        result.setDate(tmp[DATE_INDEX]);
+        result.setMark(markFactory.getMarkFromFactory(tmp[MARK_INDEX]));
+        return result;
     }
 
     @Override
     public boolean hasResult() {
-        return false;
+        boolean hasNext = false;
+        if(scanner != null && scanner.hasNext()){
+            hasNext = true;
+        }
+        return hasNext;
+    }
+
+    @Override
+    public void closeReader() {
+        if(scanner != null){
+            scanner.close();
+        }
     }
 }

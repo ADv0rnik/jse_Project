@@ -27,6 +27,10 @@ public class Result {
         this.mark = mark;
     }
 
+    public Result() {
+
+    }
+
     public String getLogin() {
         return login;
     }
@@ -61,6 +65,14 @@ public class Result {
 
    public String getStringDate(){
         return OUTPUT_DATE_FORMAT.format(date);
+    }
+
+    public Mark getMark() {
+        return mark;
+    }
+
+    public void setMark(Mark mark) {
+        this.mark = mark;
     }
 
     @Override
