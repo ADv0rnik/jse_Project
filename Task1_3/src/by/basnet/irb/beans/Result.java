@@ -1,8 +1,10 @@
 package by.basnet.irb.beans;
 
+import exceptions.ParseExceptions;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 
 public class Result {
     String login;
@@ -55,11 +57,11 @@ public class Result {
         this.date = date;
     }
 
-    public void setDate(String date) {
+    public void setDate(String dateValue) {
         try {
-            this.date = INPUT_DATE_FORMAT.parse(date);
+            date = new Date(INPUT_DATE_FORMAT.parse(dateValue).getTime());
         } catch (ParseException e) {
-            throw new IllegalArgumentException("Parsing error!");
+            throw new ParseExceptions("Date parsing error: ", e);
         }
     }
 
@@ -77,6 +79,6 @@ public class Result {
 
     @Override
     public String toString() {
-        return login + ";" + name + ";" + getStringDate() + ";" + mark;
+        return login + ";" + name + ";" + date + ";" + mark;
     }
 }

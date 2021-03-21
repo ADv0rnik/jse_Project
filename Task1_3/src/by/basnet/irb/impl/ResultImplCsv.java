@@ -4,6 +4,7 @@ import by.basnet.irb.beans.Result;
 import by.basnet.irb.dao.IResultDAO;
 import by.basnet.irb.factories.MarkFactory;
 
+import java.io.FileReader;
 import java.util.Scanner;
 
 public class ResultImplCsv implements IResultDAO {
@@ -17,7 +18,7 @@ public class ResultImplCsv implements IResultDAO {
 
     public ResultImplCsv(String fileName, MarkFactory markFactory) {
         try{
-            scanner = new Scanner(fileName);
+            scanner = new Scanner(new FileReader(fileName));
             this.markFactory = markFactory;
         } catch (Exception e) {
             System.out.println("File not found: "+ e.toString());

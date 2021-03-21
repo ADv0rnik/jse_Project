@@ -28,11 +28,11 @@ public class Mark {
     }
 
     public int strToIntMark(String value){
-        return Integer.parseInt(value) * 10;
+        return Integer.parseInt(value) ;
     }
 
     public String intToStrMark(int mark){
-        return String.valueOf(mark/10);
+        return String.valueOf(mark);
     }
 
     @Override

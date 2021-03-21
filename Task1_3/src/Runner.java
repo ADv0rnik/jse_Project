@@ -1,17 +1,14 @@
-import by.basnet.irb.beans.DecimalMark;
-import by.basnet.irb.beans.HalfResult;
-import by.basnet.irb.beans.Mark;
-import by.basnet.irb.beans.Result;
+import by.basnet.irb.ResultLoader;
+import by.basnet.irb.dao.IResultDAO;
+import by.basnet.irb.factories.MarkFactory;
+import by.basnet.irb.impl.ResultImplCsv;
 
 public class Runner {
     public static void main(String[] args) {
-        Mark mark1 = new HalfResult("20.5");
-        Mark mark = new DecimalMark("9.5");
-        Mark mark2 = new Mark("8");
-        Result result = new Result("cool", "xml", "2013-03-27", mark1);
-        System.out.println(result.toString());
-
-
+        MarkFactory markFactory = new MarkFactory();
+        IResultDAO resultDAO;
+        resultDAO = new ResultImplCsv("Task1_3/src/resource/results.csv", markFactory);
+        ResultLoader.loadResults(resultDAO);
     }
 }
 
