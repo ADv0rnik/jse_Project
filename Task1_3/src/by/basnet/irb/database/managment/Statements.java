@@ -13,9 +13,9 @@ public class Statements {
 
     public static final String INSERT_INTO_LOGINS = "INSERT IGNORE INTO results.logins VALUES(null, ?); ";
     public static final String INSERT_INTO_TESTS = "INSERT IGNORE INTO results.tests VALUES (null, ?); ";
-    public static final String GET_LOGIN_ID = "set @loginid = (SELECT idlogin FROM results.logins WHERE name = ?);";
-    public static final String GET_TEST_ID = "set @testid = (SELECT idtest FROM results.tests WHERE name = ?);";
-    public static final String INSERT_INTO_RESULTS = "INSERT INTO results.results VALUES (@loginid, @testid, ?, ?);";
+    public static final String GET_LOGIN_ID = "SELECT idlogin FROM results.logins WHERE name = ?;";
+    public static final String GET_TEST_ID = "SELECT idtest FROM results.tests WHERE name = ?;";
+    public static final String INSERT_INTO_RESULTS = "INSERT INTO results.results VALUES (?, ?, ?, ?);";
 
 
 }
