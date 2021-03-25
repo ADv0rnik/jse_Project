@@ -13,7 +13,11 @@ public class ResultLoader {
     public static void loadResults(IResultDAO reader){
         Connection conn;
         Statement stmt = null;
-        PreparedStatement ps = null;
+        PreparedStatement psSelectLogin = null;
+        PreparedStatement psInsertLogin = null;
+        PreparedStatement psSelectTest = null;
+        PreparedStatement psInsertTest = null;
+        PreparedStatement psInsertResult = null;
         try{
             conn = getConnection();
             stmt = conn.createStatement();
@@ -22,25 +26,34 @@ public class ResultLoader {
             stmt.executeUpdate(CLEAR_RESULTS);
             stmt.executeUpdate(CLEAR_TESTS);
             stmt.executeUpdate(SET_FOREIGN_KEY_TO_1);
-            ps = conn.prepareStatement(INSERT_INTO_LOGINS+"");
-            //+ GET_LOGIN_ID + GET_TEST_ID + INSERT_INTO_RESULTS
+            psSelectLogin = conn.prepareStatement(GET_LOGIN_ID);
+            psInsertLogin = conn.prepareStatement(INSERT_INTO_LOGINS);
+            psSelectTest = conn.prepareStatement(GET_TEST_ID);
+            psInsertTest = conn.prepareStatement(INSERT_INTO_TESTS);
+            psInsertResult = conn.prepareStatement(INSERT_INTO_RESULTS);
             while (reader.hasResult()){
                 Result result = reader.nextResult();
-                ps.setString(1, result.getLogin());
-              // ps.setString(2, result.getName());
-                /*ps.setString(3, result.getLogin());
-                ps.setString(4,result.getName());
-                ps.setDate(5, result.getDate());
-                ps.setInt(6, result.getMark().getValue());*/
-                ps.addBatch();
+                String login = result.getLogin();
+                String test = result.getName();
+                int loginId = getId(login, psSelectLogin, psInsertLogin);
+                int testId = getId(test, psSelectTest, psInsertTest);
+                psInsertResult.setInt(1, loginId);
+                psInsertResult.setInt(2, testId);
+                psInsertResult.setDate(3, result.getDate());
+                psInsertResult.setInt(4, result.getMark().getValue());
+                psInsertResult.executeUpdate();
+
             }
-            ps.executeBatch();
             System.out.println("OK");
         } catch (SQLException e) {
             System.out.println("Insert error: " + e.toString());
         } finally {
             DBConnector.closeStatement(stmt);
-            DBConnector.closePreparedStatement(ps);
+            DBConnector.closePreparedStatement(psInsertLogin);
+            DBConnector.closePreparedStatement(psSelectLogin);
+            DBConnector.closePreparedStatement(psSelectTest);
+            DBConnector.closePreparedStatement(psInsertTest);
+            DBConnector.closePreparedStatement(psInsertResult);
             reader.closeReader();
         }
     }
