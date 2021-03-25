@@ -14,8 +14,9 @@ public final class DBConnector {
     public static Connection getConnection(){
         Connection connection = null;
         try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(DB_URL, USER, PASS);
-        } catch (SQLException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             throw new DBExceptions("Database connecting error: " + DB_URL, e);
         }
         return connection;
